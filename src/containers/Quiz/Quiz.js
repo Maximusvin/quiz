@@ -29,6 +29,39 @@ class Quiz extends Component {
           { text: 'Язык разметки JS', id: 4 },
         ],
       },
+      {
+        id: 3,
+        question: 'В каком году появился React',
+        rightAnswerId: 3,
+        answers: [
+          { text: '1999', id: 1 },
+          { text: '2010', id: 2 },
+          { text: '2014', id: 3 },
+          { text: '2018', id: 4 },
+        ],
+      },
+      {
+        id: 4,
+        question: 'Кто такой А.Репета',
+        rightAnswerId: 3,
+        answers: [
+          { text: 'Писатель', id: 1 },
+          { text: 'Музыкант', id: 2 },
+          { text: 'Агент СБУ', id: 3 },
+          { text: 'Просто чувак с бородой', id: 4 },
+        ],
+      },
+      {
+        id: 5,
+        question: 'Где живет Вадим Е.',
+        rightAnswerId: 1,
+        answers: [
+          { text: 'Житомир', id: 1 },
+          { text: 'Улановка', id: 2 },
+          { text: 'Бангладеш', id: 3 },
+          { text: 'Киев', id: 4 },
+        ],
+      },
     ],
   };
 
