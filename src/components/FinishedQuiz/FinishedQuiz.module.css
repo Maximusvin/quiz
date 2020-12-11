@@ -1,0 +1,56 @@
+.finishedQuiz {
+  padding: 20px;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  margin: 0 10px;
+}
+
+.finishedQuiz ul {
+  margin-bottom: 15px;
+}
+
+.finishedQuiz ul li {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.finishedQuiz ul li i {
+  margin-left: 10px;
+}
+
+.result {
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.success {
+  composes: icon;
+  color: rgba(161, 240, 69, 0.7);
+}
+
+.error {
+  composes: icon;
+  color: rgba(240, 87, 108, 0.7);
+}
+
+.numberQuestion {
+  margin-right: 10px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 7px 10px;
+  border-radius: 3px;
+  transition: all 0.2s linear;
+}
+
+.btn:hover {
+  background-color: rgb(0, 122, 179);
+  color: #fff;
+}

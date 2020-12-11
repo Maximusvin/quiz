@@ -1,11 +1,14 @@
 import { Component } from 'react';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
+import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
 import s from './Quiz.module.css';
 
 class Quiz extends Component {
   state = {
     activeQuestion: 0,
     answerState: null,
+    isFinished: false,
+    results: {},
     quiz: [
       {
         id: 1,
@@ -66,23 +69,36 @@ class Quiz extends Component {
   };
 
   onAnswerClickHandler = answerId => {
-    const { quiz, activeQuestion } = this.state;
+    const { quiz, activeQuestion, answerState, results } = this.state;
+
+    //Если ответ верный - выходим из функции
+    if (answerState) {
+      const key = Object.keys(answerState)[0];
+      if (answerState[key] === 'success') {
+        return;
+      }
+    }
 
     // Берем текущий вопрос (Вопрос[индекс по activeQuestion])
     const question = quiz[activeQuestion];
 
-    // если правильный ответ = тому, на который кликнули, то ставим статус
+    // если правильный ответ = ответу, на который кликнули, то ставим статус
     // "success" и увел.индекс вопроса на 1 (переключаем его дальше)
     if (question.rightAnswerId === answerId) {
-      this.setState({ answerState: { [answerId]: 'success' } });
+      if (!results[question.id]) {
+        results[question.id] = 'success';
+      }
+
+      this.setState({
+        answerState: { [answerId]: 'success' },
+        results,
+      });
 
       const timeout = setTimeout(() => {
         // Если акт. в-с равен к-ву в-сов - тогда заканч. переключение в-сов)
         // А если нет - тогда увелич. значение акт.вопроса и выводим новый в-с
         if (activeQuestion + 1 === quiz.length) {
-          alert(
-            'Вопросы закончились. Если хочешь продолжить - скинь денюжку на карту 56145098568945365',
-          );
+          this.setState({ isFinished: true });
         } else {
           this.setState(prevState => ({
             activeQuestion: prevState.activeQuestion + 1,
@@ -92,25 +108,53 @@ class Quiz extends Component {
         clearTimeout(timeout);
       }, 1000);
     } else {
-      this.setState({ answerState: { [answerId]: 'error' } });
+      results[question.id] = 'error';
+      this.setState({
+        answerState: { [answerId]: 'error' },
+        results,
+      });
     }
   };
 
+  handleRetry = () => {
+    this.setState({
+      activeQuestion: 0,
+      answerState: null,
+      isFinished: false,
+      results: {},
+    });
+  };
+
   render() {
-    const { quiz, activeQuestion, answerState } = this.state;
+    const {
+      quiz,
+      activeQuestion,
+      answerState,
+      isFinished,
+      results,
+    } = this.state;
     const quizLength = quiz.length;
 
     return (
       <div className={s.quiz}>
         <div className={s.quizWrapper}>
           <h1 className={s.title}>Вопрос:</h1>
-          <ActiveQuiz
-            quiz={quiz[activeQuestion]}
-            onAnswerClick={this.onAnswerClickHandler}
-            quizLength={quizLength}
-            activeQuestion={activeQuestion + 1}
-            state={answerState}
-          />
+
+          {isFinished ? (
+            <FinishedQuiz
+              results={results}
+              quiz={quiz}
+              onRetry={this.handleRetry}
+            />
+          ) : (
+            <ActiveQuiz
+              quiz={quiz[activeQuestion]}
+              onAnswerClick={this.onAnswerClickHandler}
+              quizLength={quizLength}
+              activeQuestion={activeQuestion + 1}
+              state={answerState}
+            />
+          )}
         </div>
       </div>
     );
