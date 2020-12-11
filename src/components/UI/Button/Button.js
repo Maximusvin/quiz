@@ -8,7 +8,7 @@ const Button = ({ children, type, onClick, disabled }) => {
       onClick={onClick}
       className={cls.join(' ')}
       disabled={disabled}
-      type="submit"
+      type="button"
     >
       {children}
     </button>

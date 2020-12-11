@@ -12,8 +12,3 @@
 .menuToggle:hover {
   opacity: 0.7;
 }
-
-.open {
-  composes: menuToggle;
-  left: 320px;
-}
