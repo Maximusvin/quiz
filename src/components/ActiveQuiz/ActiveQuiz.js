@@ -1,23 +1,28 @@
 import s from './ActiveQuiz.module.css';
 import AnswersList from './AnswersList/AnswersList';
 
-const answers = [
-  { text: 'Игрушка для покемонов' },
-  { text: 'Фреймворк для Java' },
-  { text: 'Библиотека для Node.js' },
-  { text: 'Библиотека JavaScript' },
-];
-
-const ActiveQuiz = () => (
+const ActiveQuiz = ({
+  quiz,
+  onAnswerClick,
+  quizLength,
+  activeQuestion,
+  state,
+}) => (
   <div className={s.activeQuiz}>
     <p className={s.question}>
       <span>
-        <strong>{`2. `}</strong>
-        Что такое React?
+        <strong>{`${activeQuestion} `}</strong>
+        {quiz.question}
       </span>
-      <small>4 из 12</small>
+      <small>
+        {activeQuestion} из {quizLength}
+      </small>
     </p>
-    <AnswersList answers={answers} />
+    <AnswersList
+      answers={quiz.answers}
+      onAnswerClick={onAnswerClick}
+      state={state}
+    />
   </div>
 );
 
