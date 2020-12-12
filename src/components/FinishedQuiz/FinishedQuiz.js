@@ -1,4 +1,5 @@
 import { IoClose, IoCheckmarkSharp } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import Button from '../UI/Button/Button';
 
 import s from './FinishedQuiz.module.css';
@@ -38,7 +39,9 @@ const FinishedQuiz = ({ results, quiz, onRetry }) => {
         <Button onClick={onRetry} type="primary">
           Повторить
         </Button>
-        <Button type="success">Перейти в список тестов</Button>
+        <Link to="/">
+          <Button type="success">Перейти в список тестов</Button>
+        </Link>
       </div>
     </div>
   );
