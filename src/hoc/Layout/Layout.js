@@ -31,6 +31,10 @@ class Layout extends Component {
         <MenuToggle onToggle={this.toggleMenuHandler} isOpen={menu} />
 
         <main className={s.main}>{children}</main>
+        <footer className={s.footer}>
+          <p>Copyright © 2020</p>
+          <p>Crafted by Maxim Kozlov</p>
+        </footer>
       </div>
     );
   }

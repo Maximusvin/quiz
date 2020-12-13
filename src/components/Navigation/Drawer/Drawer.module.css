@@ -4,9 +4,11 @@
   top: 0;
   bottom: 0;
   width: 80%;
-  max-width: 300px;
+  max-width: 200px;
   padding: 40px 10px;
-  background-color: rgb(238, 238, 238);
+  box-shadow: 0 8px 10px 0 #03060b;
+  background: #0c1427;
+  border-right: 1px solid #172340;
   z-index: 10;
   transform: translateX(0px);
   transition: all 0.2s linear;
@@ -14,16 +16,16 @@
 
 .closeDrawer {
   composes: drawer;
-  transform: translateX(-300px);
+  transform: translateX(-200px);
 }
 
 .drawer ul li {
   margin-bottom: 15px;
 }
 
-.drawer ul li a {
-  color: #363d54;
-  font-size: 24px;
+.link {
+  color: #bfc3ce;
+  font-size: 14px;
   position: relative;
   padding: 0 20px 10px 20px;
   transition: all 0.2s linear;
@@ -31,20 +33,20 @@
 
 .drawer ul li a:hover,
 .active {
-  opacity: 0.7;
+  color: #727cf5;
 }
 
 .close {
   position: fixed;
   top: 40px;
-  left: 250px;
+  left: 150px;
   font-size: 20px;
   cursor: pointer;
-  color: #363d54;
+  color: #a6b0cf;
   transition: all 0.22s linear;
   z-index: 100;
 }
 
 .close:hover {
-  color: #19191b;
+  color: rgb(255, 255, 255);
 }

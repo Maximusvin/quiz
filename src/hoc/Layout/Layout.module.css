@@ -9,3 +9,20 @@
   flex-direction: column;
   flex-grow: 1;
 }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+
+  color: #a6b0cf;
+
+  background: #070d19;
+  padding: 15px 25px;
+  border-top: 1px solid #262f43;
+  transition: all 0.2s ease;
+  font-size: calc(0.875rem - 0.05rem);
+  font-family: Overpass, sans-serif;
+  font-weight: 400;
+  margin-top: auto;
+}

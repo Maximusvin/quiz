@@ -78,6 +78,7 @@ class QuizCreator extends Component {
       return (
         <Auxiliary key={controlName + index}>
           <Input
+            className={{ color: 'red' }}
             label={control.label}
             value={control.value}
             valid={control.valid}
@@ -88,7 +89,7 @@ class QuizCreator extends Component {
               this.changeHandler(event.target.value, controlName)
             }
           />
-          {index === 0 && <hr />}
+          {index === 0 && <hr className={s.hr} />}
         </Auxiliary>
       );
     });
@@ -112,24 +113,33 @@ class QuizCreator extends Component {
           { text: 3, value: 3 },
           { text: 4, value: 4 },
         ]}
+        className={s.select}
       />
     );
 
     return (
       <div className={s.quizCreator}>
         <div>
-          <h1>Создание теста</h1>
-
           <form onSubmit={this.submitHandler}>
+            <h1>Создание теста</h1>
+
             {this.renderControls()}
 
             {select}
 
-            <Button type="primary" onClick={this.addQuestionHandler}>
+            <Button
+              type="primary"
+              onClick={this.addQuestionHandler}
+              disabled={!this.state.isFormValid}
+            >
               Добавить вопрос
             </Button>
 
-            <Button type="success" onClick={this.createQuizHandler}>
+            <Button
+              type="success"
+              onClick={this.createQuizHandler}
+              disabled={this.state.quiz.length === 0}
+            >
               Создать тест
             </Button>
           </form>

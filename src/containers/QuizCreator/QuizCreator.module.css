@@ -4,7 +4,7 @@
   padding-top: 50px;
   flex-grow: 1;
   width: 100%;
-  background: linear-gradient(270deg, #f0613c 0%, #f0783c 100%);
+  background-color: #070d19;
 }
 
 .quizCreator > div {
@@ -15,11 +15,23 @@
 
 .quizCreator h1 {
   text-align: center;
+  color: #eef4ff;
+  margin: 0;
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .quizCreator form {
-  background: #eee;
-  border-radius: 5px;
-  padding: 15px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  color: #eef4ff;
+  background-color: #0c1427;
+  background-clip: border-box;
+  border: 1px solid #172340;
+  border-radius: 0.25rem;
+  box-shadow: 3px 0 10px 0 #060b15;
+}
+
+.hr {
+  margin-bottom: 30px;
 }
