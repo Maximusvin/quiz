@@ -24,3 +24,8 @@
   padding: 15px;
   border-radius: 5px;
 }
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
