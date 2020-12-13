@@ -1,16 +1,47 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import Loader from '../../components/UI/Loader/Loader';
+
 import s from './QuizList.module.css';
 
 class QuizList extends Component {
+  state = {
+    quizes: [],
+    isLoading: true,
+  };
+
   renderQuizes() {
-    return [1, 2, 3].map((quiz, index) => {
+    return this.state.quizes.map(quiz => {
       return (
-        <li key={index}>
-          <NavLink to={'/quiz/' + quiz}>Тест {quiz}</NavLink>
+        <li key={quiz.id}>
+          <NavLink to={'/quiz/' + quiz.id}>{quiz.name}</NavLink>
         </li>
       );
     });
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await axios.get(
+        'https://quiz21037-default-rtdb.firebaseio.com/quizes.json',
+      );
+      const quizes = [];
+
+      Object.keys(response.data).forEach((key, index) => {
+        quizes.push({
+          id: key,
+          name: `Тест №${index + 1}`,
+        });
+      });
+
+      this.setState({
+        quizes,
+        isLoading: false,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
@@ -19,7 +50,7 @@ class QuizList extends Component {
         <div>
           <h1>Список тестов</h1>
 
-          <ul>{this.renderQuizes()}</ul>
+          {this.state.isLoading ? <Loader /> : <ul>{this.renderQuizes()}</ul>}
         </div>
       </div>
     );

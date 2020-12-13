@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import axios from 'axios';
 import {
   createControl,
   validate,
@@ -51,9 +52,58 @@ class QuizCreator extends Component {
 
   addQuestionHandler = event => {
     event.preventDefault();
+
+    const quiz = this.state.quiz.concat();
+    const index = quiz.length + 1;
+
+    const {
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+    } = this.state.formControls;
+
+    const questionItem = {
+      question: question.value,
+      id: index,
+      rightAnswerId: this.state.rightAnswerId,
+      answers: [
+        { text: option1.value, id: option1.id },
+        { text: option2.value, id: option2.id },
+        { text: option3.value, id: option3.id },
+        { text: option4.value, id: option4.id },
+      ],
+    };
+
+    quiz.push(questionItem);
+
+    this.setState({
+      quiz,
+      isFormValid: false,
+      rightAnswerId: 1,
+      formControls: createFormControls(),
+    });
   };
 
-  createQuizHandler = () => {};
+  createQuizHandler = async event => {
+    event.preventDefault();
+
+    try {
+      await axios.post(
+        'https://quiz21037-default-rtdb.firebaseio.com/quizes.json',
+        this.state.quiz,
+      );
+      this.setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: createFormControls(),
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   changeHandler = (value, controlName) => {
     const formControls = { ...this.state.formControls };
@@ -102,10 +152,12 @@ class QuizCreator extends Component {
   };
 
   render() {
+    const { rightAnswerId, isFormValid, quiz } = this.state;
+
     const select = (
       <Select
         label="Выберите правильный ответ"
-        value={this.state.rightAnswerId}
+        value={rightAnswerId}
         onChange={this.selectChangeHandler}
         options={[
           { text: 1, value: 1 },
@@ -121,7 +173,7 @@ class QuizCreator extends Component {
       <div className={s.quizCreator}>
         <div>
           <form onSubmit={this.submitHandler}>
-            <h1>Создание теста</h1>
+            <h2>Создание теста</h2>
 
             {this.renderControls()}
 
@@ -130,7 +182,7 @@ class QuizCreator extends Component {
             <Button
               type="primary"
               onClick={this.addQuestionHandler}
-              disabled={!this.state.isFormValid}
+              disabled={!isFormValid}
             >
               Добавить вопрос
             </Button>
@@ -138,7 +190,7 @@ class QuizCreator extends Component {
             <Button
               type="success"
               onClick={this.createQuizHandler}
-              disabled={this.state.quiz.length === 0}
+              disabled={quiz.length === 0}
             >
               Создать тест
             </Button>
