@@ -1,15 +1,18 @@
 import s from './AnswerItem.module.css';
 
-const AnswerItem = ({ answer, onAnswerClick, state }) => {
+const AnswerItem = props => {
   const cls = [s.answerItem];
 
-  if (state) {
-    cls.push(s[state]);
+  if (props.state) {
+    cls.push(s[props.state]);
   }
 
   return (
-    <li className={cls.join(' ')} onClick={() => onAnswerClick(answer.id)}>
-      {answer.text}
+    <li
+      className={cls.join(' ')}
+      onClick={() => props.onAnswerClick(props.answer.id)}
+    >
+      {props.answer.text}
     </li>
   );
 };

@@ -1,29 +1,27 @@
 import s from './ActiveQuiz.module.css';
 import AnswersList from './AnswersList/AnswersList';
 
-const ActiveQuiz = ({
-  quiz,
-  onAnswerClick,
-  quizLength,
-  activeQuestion,
-  state,
-}) => (
-  <div className={s.activeQuiz}>
-    <p className={s.question}>
-      <span>
-        <strong>{`${activeQuestion} `}</strong>
-        {quiz.question}
-      </span>
-      <small>
-        {activeQuestion} из {quizLength}
-      </small>
-    </p>
-    <AnswersList
-      answers={quiz.answers}
-      onAnswerClick={onAnswerClick}
-      state={state}
-    />
-  </div>
-);
+const ActiveQuiz = props => {
+  return (
+    <div className={s.activeQuiz}>
+      <p className={s.question}>
+        <span>
+          <strong>{props.answerNumber}.</strong>&nbsp;
+          {props.question}
+        </span>
+
+        <small>
+          {props.answerNumber} из {props.quizLength}
+        </small>
+      </p>
+
+      <AnswersList
+        state={props.state}
+        answers={props.answers}
+        onAnswerClick={props.onAnswerClick}
+      />
+    </div>
+  );
+};
 
 export default ActiveQuiz;
