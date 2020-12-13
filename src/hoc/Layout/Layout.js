@@ -33,7 +33,10 @@ class Layout extends Component {
         <main className={s.main}>{children}</main>
         <footer className={s.footer}>
           <p>Copyright © 2020</p>
-          <p>Crafted by Maxim Kozlov</p>
+          <p>
+            Crafted by{' '}
+            <a href="https://www.linkedin.com/in/maxim-kozlov/">Maxim Kozlov</a>
+          </p>
         </footer>
       </div>
     );
