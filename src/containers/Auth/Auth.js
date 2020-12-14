@@ -104,10 +104,10 @@ class Auth extends Component {
   render() {
     return (
       <div className={s.auth}>
-        <div>
-          <h1>Авторизация</h1>
-
+        <div className={s.box}>
           <form onSubmit={this.submitHandler} className={s.authForm}>
+            <h2>Авторизация</h2>
+
             {this.renderInputs()}
             <div className={s.controls}>
               <Button

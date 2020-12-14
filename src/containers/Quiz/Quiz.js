@@ -99,7 +99,7 @@ class Quiz extends Component {
     return (
       <div className={s.quiz}>
         <div className={s.quizWrapper}>
-          <h1>Ответьте на все вопросы</h1>
+          <h2 className={s.title}>Вопрос:</h2>
 
           {loading ? (
             <Loader />
